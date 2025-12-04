@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Bem Estar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #F8FAFB;
+            min-height: 100vh;
+        }
+        .header {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(91, 155, 213, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-logo img {
+            max-height: 50px;
+        }
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn-outline {
+            border: 2px solid #5B9BD5;
+            color: #5B9BD5;
+            background: transparent;
+        }
+        .btn-outline:hover {
+            background: #5B9BD5;
+            color: white;
+        }
+        .btn-danger {
+            background: #E53E3E;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-danger:hover {
+            background: #C53030;
+        }
+        .btn-success {
+            background: #7BC9A6;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .tab {
+            padding: 1rem 2rem;
+            background: white;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #4A5568;
+            position: relative;
+        }
+        .tab.active {
+            background: linear-gradient(135deg, #5B9BD5, #3A7CA5);
+            color: white;
+        }
+        .tab .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #E53E3E;
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            min-width: 20px;
+            text-align: center;
+        }
+        .panel {
+            display: none;
+        }
+        .panel.active {
+            display: block;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(91, 155, 213, 0.1);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        .card.unread {
+            border-left: 4px solid #7BC9A6;
+        }
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #E2E8F0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-header h3 {
+            color: #2D3748;
+            font-size: 1.125rem;
+        }
+        .card-header .date {
+            color: #718096;
+            font-size: 0.875rem;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .info-row {
+            display: flex;
+            margin-bottom: 0.75rem;
+        }
+        .info-label {
+            font-weight: 500;
+            color: #4A5568;
+            min-width: 120px;
+        }
+        .info-value {
+            color: #2D3748;
+        }
+        .message-box {
+            background: #F8FAFB;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            color: #4A5568;
+            line-height: 1.6;
+        }
+        .card-actions {
+            padding: 1rem 1.5rem;
+            background: #F8FAFB;
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #718096;
+        }
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            fill: #CBD5E0;
+            margin-bottom: 1rem;
+        }
+        .vaga-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #E8F4FC, #E8F8F0);
+            color: #3A7CA5;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .download-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #5B9BD5;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .download-link:hover {
+            text-decoration: underline;
+        }
+        .download-link svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(91, 155, 213, 0.1);
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #5B9BD5;
+        }
+        .stat-label {
+            color: #718096;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <img src="/static/logo.png" alt="Bem Estar">
+        </div>
+        <div class="header-actions">
+            <a href="/" class="btn btn-outline">Ver Site</a>
+            <a href="/admin/logout" class="btn btn-danger">Sair</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value">{{ contacts|length }}</div>
+                <div class="stat-label">Total de Contatos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ contacts|selectattr('lido', 'equalto', false)|list|length }}</div>
+                <div class="stat-label">Contatos Novos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ applications|length }}</div>
+                <div class="stat-label">Total de Candidaturas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ applications|selectattr('lido', 'equalto', false)|list|length }}</div>
+                <div class="stat-label">Candidaturas Novas</div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showPanel('contatos')">
+                Contatos
+                {% if contacts|selectattr('lido', 'equalto', false)|list|length > 0 %}
+                <span class="badge">{{ contacts|selectattr('lido', 'equalto', false)|list|length }}</span>
+                {% endif %}
+            </button>
+            <button class="tab" onclick="showPanel('candidaturas')">
+                Candidaturas
+                {% if applications|selectattr('lido', 'equalto', false)|list|length > 0 %}
+                <span class="badge">{{ applications|selectattr('lido', 'equalto', false)|list|length }}</span>
+                {% endif %}
+            </button>
+        </div>
+
+        <div id="contatos" class="panel active">
+            {% if contacts %}
+                {% for contact in contacts %}
+                <div class="card {% if not contact.lido %}unread{% endif %}" id="contact-{{ contact.id }}">
+                    <div class="card-header">
+                        <h3>{{ contact.nome }}</h3>
+                        <span class="date">{{ contact.created_at.strftime('%d/%m/%Y %H:%M') }}</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="info-row">
+                            <span class="info-label">Telefone:</span>
+                            <span class="info-value">{{ contact.telefone }}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">E-mail:</span>
+                            <span class="info-value">{{ contact.email }}</span>
+                        </div>
+                        {% if contact.mensagem %}
+                        <div class="message-box">
+                            <strong>Mensagem:</strong><br>
+                            {{ contact.mensagem }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-actions">
+                        {% if not contact.lido %}
+                        <button class="btn btn-success" onclick="markContactRead({{ contact.id }})">Marcar como lido</button>
+                        {% endif %}
+                        <button class="btn btn-danger" onclick="deleteContact({{ contact.id }})">Excluir</button>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <p>Nenhum contato recebido ainda</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div id="candidaturas" class="panel">
+            {% if applications %}
+                {% for app in applications %}
+                <div class="card {% if not app.lido %}unread{% endif %}" id="application-{{ app.id }}">
+                    <div class="card-header">
+                        <h3>{{ app.nome }}</h3>
+                        <span class="date">{{ app.created_at.strftime('%d/%m/%Y %H:%M') }}</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="info-row">
+                            <span class="info-label">Vaga:</span>
+                            <span class="vaga-badge">{{ app.vaga }}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Telefone:</span>
+                            <span class="info-value">{{ app.telefone }}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">E-mail:</span>
+                            <span class="info-value">{{ app.email }}</span>
+                        </div>
+                        {% if app.curriculo_filename %}
+                        <div class="info-row">
+                            <span class="info-label">Currículo:</span>
+                            <a href="/admin/download/{{ app.curriculo_filename }}" class="download-link">
+                                <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                                Baixar currículo
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-actions">
+                        {% if not app.lido %}
+                        <button class="btn btn-success" onclick="markApplicationRead({{ app.id }})">Marcar como lido</button>
+                        {% endif %}
+                        <button class="btn btn-danger" onclick="deleteApplication({{ app.id }})">Excluir</button>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                    <p>Nenhuma candidatura recebida ainda</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function showPanel(panelId) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(panelId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function markContactRead(id) {
+            fetch(`/admin/contact/${id}/mark-read`, { method: 'POST' })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById(`contact-${id}`).classList.remove('unread');
+                        location.reload();
+                    }
+                });
+        }
+
+        function markApplicationRead(id) {
+            fetch(`/admin/application/${id}/mark-read`, { method: 'POST' })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById(`application-${id}`).classList.remove('unread');
+                        location.reload();
+                    }
+                });
+        }
+
+        function deleteContact(id) {
+            if (confirm('Tem certeza que deseja excluir este contato?')) {
+                fetch(`/admin/contact/${id}/delete`, { method: 'POST' })
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.success) {
+                            document.getElementById(`contact-${id}`).remove();
+                            location.reload();
+                        }
+                    });
+            }
+        }
+
+        function deleteApplication(id) {
+            if (confirm('Tem certeza que deseja excluir esta candidatura?')) {
+                fetch(`/admin/application/${id}/delete`, { method: 'POST' })
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.success) {
+                            document.getElementById(`application-${id}`).remove();
+                            location.reload();
+                        }
+                    });
+            }
+        }
+    </script>
+</body>
+</html>

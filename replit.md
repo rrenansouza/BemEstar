@@ -1,4 +1,4 @@
-# Residência Vida Plena - Landing Page
+# Bem Estar - Casa de Repouso e Longa Permanência
 
 ## Overview
 Landing page responsiva e profissional para casa de repouso / residência de longa permanência para idosos. Design clean e minimalista com paleta de cores em tons suaves de azul e verde, transmitindo calma, acolhimento e segurança.
@@ -6,42 +6,79 @@ Landing page responsiva e profissional para casa de repouso / residência de lon
 ## Current State
 - Landing page completa e funcional
 - Design responsivo mobile-first
-- Todas as seções implementadas conforme especificação
+- Sistema de contato e candidaturas com banco de dados
+- Painel administrativo com login/senha
 
 ## Project Structure
 ```
 /
-├── index.html      # Página principal com HTML, CSS e JS inline
-├── server.py       # Servidor Python simples para servir arquivos estáticos
-└── replit.md       # Documentação do projeto
+├── index.html              # Página principal com HTML, CSS e JS
+├── app.py                  # Servidor Flask com rotas API e admin
+├── templates/
+│   ├── admin_login.html    # Tela de login do admin
+│   └── admin_dashboard.html # Painel administrativo
+├── static/
+│   └── logo.png            # Logo da Bem Estar
+├── uploads/                # Currículos enviados
+└── replit.md               # Documentação do projeto
 ```
 
 ## Features Implemented
 1. **Hero Section** - Título impactante, subtítulo, benefícios destacados e CTAs
 2. **Quem Somos** - Missão, valores e proposta de cuidado humanizado
-3. **Serviços** - 6 cards com ícones (Enfermagem 24h, Consultas, Fisioterapia, Psicologia, Nutrição, Atividades)
-4. **Galeria** - Grid de 8 imagens do ambiente (usando placeholders)
-5. **Números** - Estatísticas de credibilidade (anos, famílias, satisfação)
+3. **Serviços** - 9 cards (Enfermagem 24h, Consultas, Fisioterapia, Psicologia, Nutrição, Atividades, Musicoterapia, Eventos Comemorativos, Oficinas)
+4. **Galeria** - Grid de 8 imagens + link para fotos do Facebook
+5. **Números** - Estatísticas de credibilidade
 6. **Depoimentos** - 3 cards de depoimentos de familiares
-7. **Daycare** - Serviço complementar de cuidados diurnos com checklist
-8. **Contato** - Formulário completo + informações de contato
-9. **WhatsApp Flutuante** - Botão fixo no canto inferior direito
+7. **Daycare** - Serviço complementar de cuidados diurnos
+8. **Trabalhe Conosco** - Formulário de candidatura com upload de currículo
+9. **Contato** - Formulário completo + informações de contato + mapa
+10. **WhatsApp Flutuante** - Botão fixo no canto inferior direito
+11. **Footer** - Com redes sociais (Facebook e Instagram)
+12. **Admin Panel** - Painel para visualizar contatos e candidaturas
 
 ## Technical Details
 - **Frontend**: HTML5, CSS3 (Flexbox/Grid), JavaScript vanilla
+- **Backend**: Python Flask com SQLAlchemy
+- **Database**: PostgreSQL (Neon-backed)
 - **Tipografia**: Google Fonts (Poppins)
 - **Paleta de Cores**:
   - Azul principal: #5B9BD5
   - Azul claro: #E8F4FC
   - Verde apoio: #7BC9A6
   - Verde claro: #E8F8F0
-- **Server**: Python http.server na porta 5000
 
-## How to Customize
-- Para alterar o nome da casa de repouso: buscar "Vida Plena" no index.html
-- Para alterar telefone/WhatsApp: buscar "5511999999999" no index.html
-- Para alterar endereço: buscar "Rua das Flores" no index.html
-- Para alterar imagens: substituir URLs das imagens nas seções Hero, Galeria e Daycare
+## Admin Panel
+- **URL**: /admin
+- **Usuário**: admin
+- **Senha**: bemestar2024
+- Visualizar contatos recebidos
+- Visualizar candidaturas de emprego
+- Download de currículos
+- Marcar como lido / Excluir
+
+## Contact Information
+- **Telefone/WhatsApp**: (11) 96160-1799
+- **E-mail**: bemestarestadia@gmail.com
+- **Endereço**: Rua Professor Benedito Alarico de Castro Borelli, 214 - Parque São Domingos, São Paulo - SP, CEP 05122-000
+
+## Social Media
+- **Facebook**: https://www.facebook.com/bemestarestadia
+- **Instagram**: https://www.instagram.com/bemestarestadia/
+
+## API Endpoints
+- `POST /api/contato` - Recebe formulário de contato
+- `POST /api/trabalhe-conosco` - Recebe candidatura de emprego
 
 ## Recent Changes
-- 2024-12-04: Criação inicial da landing page completa
+- 2024-12-04: Landing page inicial criada
+- 2024-12-04: Alterado de "Vida Plena" para "Bem Estar"
+- 2024-12-04: Adicionado logo da empresa
+- 2024-12-04: Atualizado WhatsApp para (11) 96160-1799
+- 2024-12-04: Adicionados serviços de Musicoterapia e Eventos Comemorativos
+- 2024-12-04: Adicionado link para fotos do Facebook
+- 2024-12-04: Criada seção "Trabalhe Conosco" com formulário
+- 2024-12-04: Atualizado endereço e informações de contato
+- 2024-12-04: Adicionado mapa com links Google Maps/Waze
+- 2024-12-04: Adicionados ícones de redes sociais no footer
+- 2024-12-04: Criado painel administrativo com banco de dados
