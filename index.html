@@ -202,6 +202,30 @@
         .toast.success { background: var(--verde-escuro); }
         .toast.error { background: #E53E3E; }
 
+        /* Hamburger Menu Button */
+        .hamburger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 10px; z-index: 1002; }
+        .hamburger span { display: block; width: 25px; height: 3px; background: var(--texto-escuro); border-radius: 3px; transition: all 0.3s ease; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -7px); }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; opacity: 0; transition: opacity 0.3s ease; }
+        .mobile-menu-overlay.active { display: block; opacity: 1; }
+
+        /* Mobile Menu */
+        .mobile-menu { position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: var(--branco); z-index: 1001; padding: 80px 2rem 2rem; display: flex; flex-direction: column; gap: 0; box-shadow: -5px 0 20px rgba(0,0,0,0.1); transition: right 0.3s ease; }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu a { padding: 1rem 0; font-size: 1.125rem; font-weight: 500; color: var(--texto-escuro); border-bottom: 1px solid var(--cinza-claro); transition: color 0.3s ease; }
+        .mobile-menu a:last-child { border-bottom: none; color: var(--branco); background: var(--verde-apoio); padding: 1rem; border-radius: 8px; text-align: center; margin-top: 1rem; }
+        .mobile-menu a:hover { color: var(--azul-principal); }
+        .mobile-menu a:last-child:hover { color: var(--branco); background: var(--verde-escuro); }
+
+        /* Hide hamburger on desktop */
+        @media (min-width: 1024px) {
+            .hamburger { display: none; }
+        }
+
         /* Mobile-specific styles (up to 639px) */
         @media (max-width: 639px) {
             /* Hero: image above title */
@@ -302,10 +326,12 @@
             .servicos-grid { grid-template-columns: repeat(2, 1fr); }
             .galeria-grid { grid-template-columns: repeat(2, 1fr); }
             .depoimentos-grid { grid-template-columns: repeat(2, 1fr); }
-            .valores { grid-template-columns: repeat(3, 1fr); }
-            .whatsapp-text { display: inline; }
+            .valores { grid-template-columns: repeat(4, 1fr); }
             .galeria-cta { flex-direction: row; justify-content: center; }
             .hero-image img { max-width: 550px; }
+            /* Desktop: WhatsApp button shows only icon */
+            .whatsapp-float { padding: 1rem; border-radius: 50%; }
+            .whatsapp-text { display: none; }
         }
 
         @media (min-width: 1024px) {
@@ -355,8 +381,24 @@
             <div class="header-cta">
                 <a href="#contato" class="btn btn-primary">Fale Conosco</a>
             </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+    <nav class="mobile-menu" id="mobile-menu">
+        <a href="#quem-somos">Quem Somos</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#galeria">Estrutura</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#trabalhe-conosco">Trabalhe Conosco</a>
+        <a href="#contato">Fale Conosco</a>
+    </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="inicio">
@@ -406,6 +448,13 @@
                         </div>
                         <h3>Ambiente Familiar</h3>
                         <p>Espaços projetados para proporcionar conforto e sensação de lar.</p>
+                    </div>
+                    <div class="valor-item">
+                        <div class="valor-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        <h3>Profissionais Capacitados</h3>
+                        <p>Equipe qualificada e em constante atualização para oferecer o melhor atendimento.</p>
                     </div>
                 </div>
 
@@ -557,6 +606,9 @@
                 </div>
                 <div class="galeria-item">
                     <img src="/static/gallery-15.png" alt="Almoço especial">
+                </div>
+                <div class="galeria-item">
+                    <img src="/static/gallery-16.png" alt="Celebração com profissional">
                 </div>
             </div>
 
@@ -873,6 +925,21 @@
 
     <!-- JavaScript -->
     <script>
+        // Mobile Hamburger Menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+        function toggleMobileMenu() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMobileMenu);
+        mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
+
         // Toast notification
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
@@ -885,12 +952,22 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                
+                // Close mobile menu first if open
+                if (mobileMenu.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+                
                 if (target) {
-                    const headerOffset = 80;
-                    const elementPosition = target.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                    // Small delay to allow menu animation to complete
+                    setTimeout(() => {
+                        const headerOffset = 80;
+                        const elementPosition = target.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                    }, 100);
                 }
             });
         });
