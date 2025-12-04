@@ -1,0 +1,183 @@
+Crie uma landing page completa, responsiva (mobile-first) em HTML, CSS e JavaScript puro, para uma casa de repouso / residência de longa permanência para idosos, chamada [NOME DA CASA DE REPOUSO], localizada em [CIDADE/ESTADO].
+
+Referência de layout e estrutura:
+Use como referência a estrutura da landing page da Hospedagem Coralina – Longa Permanência (link: https://lp.hospedagemcoralina.com.br/longa_permanencia).
+Não copie textos nem imagens, mas mantenha uma estrutura de seções semelhante, com:
+
+Hero com título forte, subtítulo e CTA principal
+
+Seção “Quem Somos”
+
+Seção de benefícios/serviços com cards (como “Enfermagem 24h”, “Consulta Médica”, etc.)
+
+Seção com fotos/galeria do ambiente
+
+Seção com “números” (anos de experiência, famílias atendidas, etc.)
+
+Seção de depoimentos
+
+Seção extra de serviço complementar (como Daycare / cuidados diurnos)
+
+Seção final com CTA forte + formulário de contato
+
+🎨 Identidade visual / UI
+
+Crie uma paleta de cores em tons suaves de azul e verde, bem claros, passando sensação de: calma, acolhimento, segurança e “casa de repouso”.
+
+Exemplo de direção (pode ajustar):
+
+Azul claro principal (para cabeçalhos e destaques)
+
+Verde claro como cor de apoio e detalhes
+
+Fundo com cinza bem claro ou branco (design clean, minimalista)
+
+Estilo clean e minimalista, com bastante espaço em branco, tipografia legível, foco em leitura fácil para familiares de idosos.
+
+Use fontes sem serifa (ex.: Poppins, Inter, Roboto ou similar via Google Fonts).
+
+Crie sections bem definidas, com separação clara entre os blocos (ex: diferença de fundo, margin/padding, títulos grandes).
+
+🧱 Estrutura da página (seções)
+
+Implemente a página com as seguintes seções, cada uma bem marcada com <section> e classes claras:
+
+Hero (topo da página)
+
+Título forte: algo como “Garanta conforto, segurança e cuidado especializado para quem você ama”.
+
+Subtítulo explicando que [NOME DA CASA DE REPOUSO] é uma casa de repouso / residência assistida com equipe especializada.
+
+CTA principal em botão grande (cor de destaque):
+
+Texto do botão: “Iniciar atendimento agora” ou “Fale com nossa equipe pelo WhatsApp”.
+
+Campo para destacar um benefício chave (ex.: “Enfermagem 24h • Médico semanal • Ambiente acolhedor”).
+
+Quem Somos
+
+Título: “Quem Somos”
+
+Parágrafos falando da missão, valores e proposta da casa de repouso: cuidado humanizado, respeito, dignidade, ambiente familiar.
+
+CTA secundário: “Quero agendar uma visita guiada”.
+
+Serviços / Cuidados Oferecidos
+
+Título: “Bem-estar em cada detalhe”
+
+Subtítulo breve: algo como “Conheça os cuidados oferecidos pela nossa equipe especializada”.
+
+Cards com ícones e textos curtos, inspirados na estrutura da página de referência, por exemplo:
+
+Enfermagem 24h
+
+Consultas médicas periódicas
+
+Fisioterapia especializada
+
+Apoio psicológico / psicossocial
+
+Nutrição balanceada
+
+Atividades cognitivas e recreativas
+
+Oficinas criativas
+
+Inserir um CTA ao final da seção: “Quero saber se é o ideal para meu familiar”.
+
+Galeria do Ambiente
+
+Título: “Um lar acolhedor e completo”
+
+Texto curto explicando que as fotos mostram o ambiente, áreas de convivência, quartos, jardim, etc.
+
+Use um grid de imagens (pode usar imagens de placeholder com https://picsum.photos ou similar).
+
+CTA: “Quero conversar com alguém da equipe”.
+
+Números / Credenciais
+
+Título: “Números que refletem nossa dedicação”
+
+3 ou 4 indicadores em destaque, por exemplo:
+
+“+ [X] anos de experiência”
+
+“+ [Y] famílias atendidas”
+
+“+ [Z]% de satisfação dos familiares”
+
+CTA: “Fale conosco pelo WhatsApp”.
+
+Depoimentos de familiares
+
+Título: “Depoimentos de quem confia em nós”
+
+3 a 5 cards de depoimentos curtos, com nome da pessoa e frase de confiança, sempre mantendo tom humanizado e realista (mas inventar textos genéricos, sem copiar a referência).
+
+Seção de serviço complementar (ex.: Daycare / Cuidados Diurnos)
+
+Título: algo como “Daycare: cuidado diário que acolhe e estimula”.
+
+Lista com marcadores (checklist) para “Para quem é indicado”:
+
+Idosos que ficam sozinhos em casa durante o dia
+
+Famílias que precisam de apoio enquanto trabalham
+
+Idosos que precisam de socialização, segurança e rotina
+
+CTA: “Conhecer o serviço de Daycare”.
+
+Seção final de contato / formulário
+
+Título: “Fale com nossa equipe especializada”
+
+Subtítulo: explique que alguém da equipe entrará em contato para entender o caso e orientar a família.
+
+Formulário com campos:
+
+Nome
+
+Telefone / WhatsApp
+
+E-mail
+
+Campo de mensagem (“Conte um pouco sobre a necessidade do seu familiar”)
+
+Botão de envio com texto: “Enviar e aguardar contato”.
+
+Abaixo do formulário, exibir também:
+
+Telefone fixo / WhatsApp: [INSERIR CONTATO]
+
+Endereço: [ENDEREÇO]
+
+📱 Responsividade e UX
+
+Faça o layout responsivo:
+
+No mobile: colunas viram blocos empilhados, botões ocupam largura quase total, texto com corpo confortável.
+
+No desktop: hero em duas colunas (texto + imagem), cards em grid, galeria com 3 ou 4 colunas.
+
+Botões de CTA devem ter bom contraste com o fundo (de preferência usando um verde ou azul um pouco mais forte, dentro da paleta leve).
+
+Inclua um botão flutuante fixo (no canto inferior direito) simulando um botão de WhatsApp com o texto “Atendimento via WhatsApp”.
+
+⚙️ Implementação técnica
+
+Entregar tudo em um único arquivo index.html, contendo:
+
+<style> interno com o CSS completo
+
+<script> interno apenas se necessário (por exemplo, para smooth scroll ou alguma interação simples)
+
+Não utilizar frameworks (sem Bootstrap, sem Tailwind).
+
+Comentar trechos importantes no HTML/CSS para facilitar futuras edições (ex.: <!-- Início seção Depoimentos -->).
+
+Objetivo final
+
+Criar uma landing page bonita, profissional, limpa e acolhedora, inspirada na estrutura da landing page da Hospedagem Coralina, mas com identidade visual própria em azul e verde claros, textos originais e foco em conversão de famílias interessadas nos serviços da [NOME DA CASA DE REPOUSO].
