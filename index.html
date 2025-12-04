@@ -202,6 +202,99 @@
         .toast.success { background: var(--verde-escuro); }
         .toast.error { background: #E53E3E; }
 
+        /* Mobile-specific styles (up to 639px) */
+        @media (max-width: 639px) {
+            /* Hero: image above title */
+            .hero .container {
+                display: flex;
+                flex-direction: column;
+            }
+            .hero-content {
+                order: 2;
+            }
+            .hero-image {
+                order: 1;
+                margin-top: 0;
+                margin-bottom: 1.5rem;
+            }
+            .hero-image img {
+                max-width: 100%;
+                max-height: 280px;
+                object-fit: cover;
+                margin: 0 auto;
+            }
+            
+            /* Hero: smaller buttons side by side */
+            .hero-cta {
+                flex-direction: row;
+                gap: 0.75rem;
+                justify-content: center;
+            }
+            .hero-cta .btn {
+                padding: 0.75rem 1.25rem;
+                font-size: 0.875rem;
+            }
+            
+            /* Quem Somos: 2 items per row */
+            .valores {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            .valor-item {
+                padding: 1.25rem;
+            }
+            .valor-item h3 {
+                font-size: 1rem;
+            }
+            .valor-item p {
+                font-size: 0.875rem;
+            }
+            
+            /* Nossos Cuidados: 2 items per row */
+            .servicos-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            .servico-card {
+                padding: 1.25rem;
+            }
+            .servico-card h3 {
+                font-size: 0.9rem;
+            }
+            .servico-card p {
+                font-size: 0.8rem;
+            }
+            .servico-icon {
+                width: 50px;
+                height: 50px;
+                margin-bottom: 1rem;
+            }
+            .servico-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+            
+            /* Nossa Estrutura: 2 images per row */
+            .galeria-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+            
+            /* Contact section: fix phone icon alignment */
+            .info-item {
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: flex-start;
+                text-align: left;
+            }
+            .contato-info {
+                text-align: left;
+            }
+            .info-icon {
+                flex-shrink: 0;
+            }
+        }
+
         @media (min-width: 640px) {
             h1 { font-size: 2.5rem; }
             h2 { font-size: 2rem; }
@@ -830,52 +923,74 @@
             document.getElementById('file-name').textContent = fileName;
         });
 
-        // Number counter animation
+        // Number counter animation - restarts when user leaves and re-enters section
         function animateNumbers() {
             const numerosSection = document.getElementById('numeros');
             const numeroValores = document.querySelectorAll('.numero-valor');
-            let animated = false;
+            let isAnimating = false;
+            let isInView = false;
+
+            function resetNumbers() {
+                numeroValores.forEach(el => {
+                    const prefix = el.dataset.prefix || '';
+                    const suffix = el.dataset.suffix || '';
+                    el.textContent = prefix + '0' + suffix;
+                });
+            }
 
             function startCounting() {
-                if (animated) return;
+                if (isAnimating) return;
+                isAnimating = true;
                 
-                const sectionTop = numerosSection.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (sectionTop < windowHeight * 0.8) {
-                    animated = true;
+                numeroValores.forEach(el => {
+                    const target = parseInt(el.dataset.target);
+                    const prefix = el.dataset.prefix || '';
+                    const suffix = el.dataset.suffix || '';
+                    const duration = 2000;
+                    const startTime = performance.now();
                     
-                    numeroValores.forEach(el => {
-                        const target = parseInt(el.dataset.target);
-                        const prefix = el.dataset.prefix || '';
-                        const suffix = el.dataset.suffix || '';
-                        const duration = 2000;
-                        const startTime = performance.now();
+                    function updateNumber(currentTime) {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
                         
-                        function updateNumber(currentTime) {
-                            const elapsed = currentTime - startTime;
-                            const progress = Math.min(elapsed / duration, 1);
-                            
-                            // Easing function for smooth animation
-                            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-                            const current = Math.floor(easeOutQuart * target);
-                            
-                            el.textContent = prefix + current + suffix;
-                            
-                            if (progress < 1) {
-                                requestAnimationFrame(updateNumber);
-                            } else {
-                                el.textContent = prefix + target + suffix;
-                            }
+                        // Easing function for smooth animation
+                        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                        const current = Math.floor(easeOutQuart * target);
+                        
+                        el.textContent = prefix + current + suffix;
+                        
+                        if (progress < 1) {
+                            requestAnimationFrame(updateNumber);
+                        } else {
+                            el.textContent = prefix + target + suffix;
+                            isAnimating = false;
                         }
-                        
-                        requestAnimationFrame(updateNumber);
-                    });
+                    }
+                    
+                    requestAnimationFrame(updateNumber);
+                });
+            }
+
+            function checkVisibility() {
+                const rect = numerosSection.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const isCurrentlyInView = rect.top < windowHeight * 0.8 && rect.bottom > 0;
+                
+                if (isCurrentlyInView && !isInView) {
+                    // Entering view - reset and start animation
+                    resetNumbers();
+                    startCounting();
+                } else if (!isCurrentlyInView && isInView) {
+                    // Leaving view - reset for next entry
+                    resetNumbers();
+                    isAnimating = false;
                 }
+                
+                isInView = isCurrentlyInView;
             }
             
-            window.addEventListener('scroll', startCounting);
-            startCounting(); // Check on load
+            window.addEventListener('scroll', checkVisibility);
+            checkVisibility(); // Check on load
         }
         
         animateNumbers();
