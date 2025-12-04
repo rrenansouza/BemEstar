@@ -21,7 +21,7 @@ Landing page responsiva e profissional para casa de repouso / residência de lon
 │   ├── logo.png            # Logo da Bem Estar
 │   ├── hero-image.png      # Imagem da Hero Section
 │   ├── daycare-image.png   # Imagem da seção Daycare
-│   └── gallery-[1-15].png  # 15 imagens da galeria Nossa Estrutura
+│   └── gallery-[1-16].png  # 16 imagens da galeria Nossa Estrutura
 ├── uploads/                # Currículos enviados
 └── replit.md               # Documentação do projeto
 ```
@@ -30,13 +30,13 @@ Landing page responsiva e profissional para casa de repouso / residência de lon
 1. **Hero Section** - Título com fonte Poppins, imagem personalizada, botões "Saiba Mais" e "Entrar em contato"
 2. **Quem Somos** - Missão, valores e proposta de cuidado humanizado
 3. **Serviços** - 9 cards (Enfermagem 24h, Consultas, Fisioterapia, Psicologia, Nutrição, Atividades, Musicoterapia, Eventos Comemorativos, Oficinas)
-4. **Galeria** - Grid de 15 imagens reais da casa + link para fotos do Facebook
+4. **Galeria** - Grid de 16 imagens reais da casa + link para fotos do Facebook
 5. **Números** - Estatísticas de credibilidade com animação de contagem ao scroll
 6. **Depoimentos** - 3 cards de depoimentos de familiares
 7. **Daycare** - Serviço complementar de cuidados diurnos com imagem personalizada
 8. **Trabalhe Conosco** - Formulário limpo com toggle iOS para aceitar freelances
 9. **Contato** - Formulário completo + informações de contato + mapa
-10. **WhatsApp Flutuante** - Botão fixo no canto inferior direito
+10. **WhatsApp Flutuante** - Botão fixo no canto inferior direito (ícone apenas no desktop)
 11. **Footer** - Redes sociais (Facebook e Instagram) sem logo
 12. **Admin Panel** - Painel para visualizar contatos e candidaturas
 
@@ -100,3 +100,7 @@ Landing page responsiva e profissional para casa de repouso / residência de lon
 - 2024-12-04: Mobile - Quem Somos e Nossos Cuidados: 2 itens por linha
 - 2024-12-04: Mobile - Nossa Estrutura: 2 imagens por linha
 - 2024-12-04: Mobile - Corrigido alinhamento do ícone de telefone no contato
+- 2024-12-04: Adicionado "Profissionais Capacitados" como 4º valor na seção Quem Somos
+- 2024-12-04: Desktop - WhatsApp flutuante mostra apenas ícone (circular)
+- 2024-12-04: Mobile - Adicionado menu hamburger com navegação completa
+- 2024-12-04: Adicionada 16ª imagem na galeria Nossa Estrutura
