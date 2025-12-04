@@ -38,6 +38,7 @@ class JobApplication(db.Model):
     email = db.Column(db.String(200), nullable=False)
     vaga = db.Column(db.String(100), nullable=False)
     curriculo_filename = db.Column(db.String(300))
+    aceita_freelance = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     lido = db.Column(db.Boolean, default=False)
 
@@ -87,6 +88,7 @@ def submit_job_application():
         telefone = request.form.get('telefone')
         email = request.form.get('email')
         vaga = request.form.get('vaga')
+        aceita_freelance = request.form.get('aceita_freelance', 'nao') == 'sim'
         
         curriculo_filename = None
         if 'curriculo' in request.files:
@@ -101,7 +103,8 @@ def submit_job_application():
             telefone=telefone,
             email=email,
             vaga=vaga,
-            curriculo_filename=curriculo_filename
+            curriculo_filename=curriculo_filename,
+            aceita_freelance=aceita_freelance
         )
         db.session.add(application)
         db.session.commit()
