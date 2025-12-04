@@ -95,3 +95,8 @@ Landing page responsiva e profissional para casa de repouso / residência de lon
 - 2024-12-04: Restaurados botões "Saiba Mais" e "Entrar em contato" na Hero Section
 - 2024-12-04: Removido logo do Footer
 - 2024-12-04: Adicionadas 15 imagens reais na seção "Nossa Estrutura"
+- 2024-12-04: Animação de contagem reinicia ao sair e voltar para a seção
+- 2024-12-04: Mobile - Hero: imagem acima do título, botões menores lado a lado
+- 2024-12-04: Mobile - Quem Somos e Nossos Cuidados: 2 itens por linha
+- 2024-12-04: Mobile - Nossa Estrutura: 2 imagens por linha
+- 2024-12-04: Mobile - Corrigido alinhamento do ícone de telefone no contato
