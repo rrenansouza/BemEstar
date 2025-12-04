@@ -18,23 +18,25 @@ Landing page responsiva e profissional para casa de repouso / residência de lon
 │   ├── admin_login.html    # Tela de login do admin
 │   └── admin_dashboard.html # Painel administrativo
 ├── static/
-│   └── logo.png            # Logo da Bem Estar
+│   ├── logo.png            # Logo da Bem Estar
+│   ├── hero-image.png      # Imagem da Hero Section
+│   └── daycare-image.png   # Imagem da seção Daycare
 ├── uploads/                # Currículos enviados
 └── replit.md               # Documentação do projeto
 ```
 
 ## Features Implemented
-1. **Hero Section** - Título impactante, subtítulo, benefícios destacados e CTAs
+1. **Hero Section** - Título com fonte Poppins, imagem personalizada, botão "Veja mais fotos"
 2. **Quem Somos** - Missão, valores e proposta de cuidado humanizado
 3. **Serviços** - 9 cards (Enfermagem 24h, Consultas, Fisioterapia, Psicologia, Nutrição, Atividades, Musicoterapia, Eventos Comemorativos, Oficinas)
 4. **Galeria** - Grid de 8 imagens + link para fotos do Facebook
-5. **Números** - Estatísticas de credibilidade
+5. **Números** - Estatísticas de credibilidade com animação de contagem ao scroll
 6. **Depoimentos** - 3 cards de depoimentos de familiares
-7. **Daycare** - Serviço complementar de cuidados diurnos
-8. **Trabalhe Conosco** - Formulário de candidatura com upload de currículo
+7. **Daycare** - Serviço complementar de cuidados diurnos com imagem personalizada
+8. **Trabalhe Conosco** - Formulário limpo com toggle iOS para aceitar freelances
 9. **Contato** - Formulário completo + informações de contato + mapa
 10. **WhatsApp Flutuante** - Botão fixo no canto inferior direito
-11. **Footer** - Com redes sociais (Facebook e Instagram)
+11. **Footer** - Com logo e redes sociais (Facebook e Instagram)
 12. **Admin Panel** - Painel para visualizar contatos e candidaturas
 
 ## Technical Details
@@ -82,3 +84,11 @@ Landing page responsiva e profissional para casa de repouso / residência de lon
 - 2024-12-04: Adicionado mapa com links Google Maps/Waze
 - 2024-12-04: Adicionados ícones de redes sociais no footer
 - 2024-12-04: Criado painel administrativo com banco de dados
+- 2024-12-04: Removido "Contato" do header
+- 2024-12-04: Atualizada imagem da Hero Section com imagem personalizada
+- 2024-12-04: Removidos ícones de benefícios da Hero Section
+- 2024-12-04: Mantido apenas botão "Veja mais fotos" na Hero
+- 2024-12-04: Adicionada animação de contagem aos números em "Nossa Trajetória"
+- 2024-12-04: Atualizada imagem da seção Daycare
+- 2024-12-04: Removida lista de vagas do "Trabalhe Conosco"
+- 2024-12-04: Adicionado toggle iOS para aceitar freelances no formulário de candidatura
